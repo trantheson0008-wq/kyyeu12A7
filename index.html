@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+    background-color: #f4ece1;
+    /* Thêm một chút vân giấy nhẹ cho xịn */
+    background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+    background-attachment: fixed;
+}
+section {
+    position: relative;
+    z-index: 1;
+    /* Giúp các khối nội dung nổi bật trên nền mới */
+    margin-bottom: 50px;
+}
+
+/* Đảm bảo chữ trên nền mới vẫn dễ đọc */
+p, h1, h2 {
+    color: #2d3436; 
+}
+        .navbar {
+    position: fixed; /* Luôn cố định ở trên cùng khi cuộn trang */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    background: rgba(255, 255, 255, 0.8); /* Nền trắng trong suốt */
+    backdrop-filter: blur(10px); /* Làm mờ hậu cảnh */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000; /* Luôn nằm trên cùng các thành phần khác */
+    box-sizing: border-box;
+}
+
+.nav-logo {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #3498db;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 600;
+    transition: color 0.3s;
+    font-size: 1.1rem;
+}
+
+.nav-links a:hover {
+    color: #3498db; /* Đổi màu khi di chuột vào */
+}
+
+/* Thêm padding cho body để nội dung không bị thanh navbar che mất */
+body {
+    padding-top: 70px;
+}
+        /* Tổng thể trang chủ */
+.home-wrapper {
+    background: #fdf5e6; /* Màu nền kem nhẹ hợp với vibe anime */
+    overflow-x: hidden;
+}
+
+/* Banner đoàn tàu */
+.hero-banner {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Điều chỉnh tùy theo ảnh của bạn */
+    overflow: hidden;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Khu vực Collection */
+.collection-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.section-title {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5rem;
+    color: #8d6e63;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+.class-members-section {
+    padding: 50px 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.members-carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.members-wrapper {
+    width: 80%; /* Chiều rộng khung hiển thị */
+    overflow: hidden; /* Ẩn các thẻ nằm ngoài khung */
+}
+
+.members-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 20px 0;
+}
+
+/* Định dạng thẻ thành viên giống hình mẫu */
+.member-card {
+    min-width: 280px; /* Độ rộng mỗi thẻ */
+    height: 400px;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    position: relative;
+    border: 8px solid #fff; /* Viền trắng dày xung quanh */
+}
+
+.member-photo {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lớp phủ tên phía dưới ảnh */
+.member-name-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 10px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+
+/* Nút điều hướng */
+.nav-btn {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 2rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.nav-btn:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+
+
+/* Container cho tiêu đề */
+.section-divider {
+    text-align: center;
+    margin: 60px 0 30px 0;
+    position: relative;
+}
+
+/* Kiểu chữ nghệ thuật */
+.class-title {
+    font-family: 'Caveat', cursive; /* Font chữ viết tay chúng ta đã dùng */
+    font-size: 3.5rem;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+    display: inline-block;
+    position: relative;
+    /* Hiệu ứng đổ bóng nhẹ cho chữ */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.class-title:hover {
+    transform: scale(1.05) rotate(-2deg);
+    color: #3498db; /* Đổi màu nhẹ khi di chuột vào */
+}
+
+/* Đường gạch chân kiểu vẽ tay (Doodle Underline) */
+.title-underline {
+    width: 250px;
+    height: 8px;
+    background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png'); /* Tạo kết cấu nhám */
+    background-color: #ffd54f; /* Màu vàng của phấn hoặc bút dạ quang */
+    margin: 0 auto;
+    border-radius: 50% 20% 50% 10%; /* Làm đường kẻ trông méo mó tự nhiên */
+    opacity: 0.7;
+    transform: translateY(-5px);
+}
+
+/* Thêm một icon nhỏ trang trí bên cạnh (tùy chọn) */
+.class-title::before {
+    content: '✨';
+    position: absolute;
+    left: -40px;
+    top: 10px;
+    font-size: 1.5rem;
+    animation: twinkle 2s infinite;
+}
+
+.class-title::after {
+    content: '🎓';
+    position: absolute;
+    right: -45px;
+    bottom: 10px;
+    font-size: 1.5rem;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+.class-memories {
+    display: flex;
+    justify-content: center; /* Căn giữa toàn bộ khối theo chiều ngang */
+    padding: 80px 20px;
+    background-color: transparent; /* Để lộ nền banner hoặc màu nền chung */
+}
+
+.memory-container {
+    max-width: 700px; /* Giới hạn độ rộng để người đọc dễ tập trung vào giữa */
+    width: 100%;
+    text-align: justify; /* Căn đều hai bên cho chuyên nghiệp */
+    background: rgba(255, 255, 255, 0.9); /* Nền trắng nhẹ để chữ nổi bật */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.memory-title {
+    text-align: center;
+    font-family: 'Quicksand', sans-serif; /* Font không chân, hiện đại, dễ đọc */
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.memory-content p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font hệ thống chuẩn, cực kỳ dễ đọc */
+    font-size: 1.1rem;
+    line-height: 1.8; /* Độ giãn dòng lý tưởng để không bị dính chữ */
+    color: #444;
+    margin-bottom: 20px;
+    text-indent: 30px; /* Thụt đầu dòng đoạn văn cho đúng quy tắc tiếng Việt */
+}
+/* Trạng thái khi chưa cuộn tới */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px); /* Đẩy chữ xuống 30px */
+    transition: all 1s ease-out; /* Thời gian hiện ra là 1 giây */
+}
+
+/* Trạng thái khi đã cuộn tới (sẽ được JS thêm class 'active') */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0); /* Chữ bay về vị trí cũ */
+}
+.main-title-section {
+    text-align: center;
+    padding: 80px 20px 40px 20px; /* Padding để tạo khoảng trống */
+    background-color: transparent; /* Đảm bảo không che background chính */
+}
+
+.main-kỷ-yếu-title {
+    font-family: 'Montserrat', sans-serif; /* Font hiện đại, mạnh mẽ */
+    font-size: 4.5rem; /* Tiêu đề lớn, dễ nhìn */
+    font-weight: 700; /* In đậm */
+    color: #4a4a4a; /* Màu xám đậm ấm áp, hài hòa với màu nền xanh */
+    letter-spacing: 5px; /* Giãn chữ tạo cảm giác sang trọng */
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.15); /* Đổ bóng nhẹ */
+    position: relative;
+    display: inline-block; /* Để áp dụng hiệu ứng tốt hơn */
+}
+
+/* Thêm hiệu ứng gạch chân hoặc đường viền trang trí (tùy chọn) */
+.main-kỷ-yếu-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -15px; /* Vị trí dưới tiêu đề */
+    transform: translateX(-50%);
+    width: 80%; /* Độ rộng đường gạch chân */
+    height: 6px;
+    background: linear-gradient(to right, #a8dadc, #fca311); /* Màu gradient nổi bật */
+    border-radius: 3px;
+    opacity: 0.8;
+}
+
+/* Hiệu ứng khi di chuột vào (tùy chọn) */
+.main-kỷ-yếu-title:hover {
+    transform: scale(1.02);
+    color: #e63946; /* Đổi màu nhẹ khi hover */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Đảm bảo font được tải */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+.memory-gallery {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa toàn bộ phần trưng bày */
+    padding: 50px 0;
+}
+
+.camera-container {
+    position: relative;
+    width: 95vw; /* Chiều rộng chiếm gần hết màn hình (95% viewport width) */
+    max-width: 1400px; /* Giới hạn độ rộng tối đa để ảnh không bị vỡ trên màn hình quá lớn */
+    margin: 0 auto;
+    border-radius: 20px; /* Bo góc nhẹ cho toàn bộ khối nếu muốn */
+    overflow: hidden; /* Cắt bớt phần thừa nếu có */
+}
+
+.camera-bg {
+    width: 100%; /* Ảnh background luôn lấp đầy container */
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Điều chỉnh lại vị trí ảnh kỷ niệm để khớp với tỉ lệ mới */
+.photo-slot {
+    position: absolute;
+    /* Các thông số % dưới đây sẽ tự động co giãn theo độ rộng 95vw của container */
+    transition: transform 0.3s ease;
+}
+
+.photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 5px solid white; /* Tạo viền trắng cho giống ảnh Polaroid thực */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.phone-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.phone-case {
+    width: 320px;
+    height: 600px;
+    background: #1a1a1a;
+    border-radius: 40px;
+    padding: 15px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 4px solid #333;
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-screen {
+    flex: 1;
+    background: #000;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Slider ảnh */
+.photo-slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.photo-slider img.active {
+    opacity: 1;
+}
+/* Loại bỏ định dạng mặc định của thẻ link */
+.member-card {
+    text-decoration: none; /* Bỏ gạch chân */
+    display: block; /* Đảm bảo thẻ link bao trùm toàn bộ diện tích */
+    min-width: 280px;
+    height: 400px;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    position: relative;
+    border: 8px solid #fff;
+    transition: all 0.3s ease;
+}
+
+/* Hiệu ứng khi di chuột vào (Hover) */
+.member-card:hover {
+    transform: translateY(-10px) scale(1.02); /* Thẻ nhấc nhẹ lên */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    cursor: pointer;
+}
+
+/* Hiệu ứng khi bấm vào (Active) */
+.member-card:active {
+    transform: scale(0.98); /* Hiệu ứng lún xuống khi click */
+}
+
+/* Các icon overlay */
+.app-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Để không chặn click vào nút */
+    color: white;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.side-icons {
+    position: absolute;
+    right: 10px;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 24px;
+}
+/* Container chứa tất cả các card */
+.members-track {
+    display: flex; /* Bắt buộc để dàn hàng ngang */
+    gap: 20px;
+    align-items: flex-start;
+}
+
+/* Định dạng cho từng card */
+.member-card {
+    flex: 0 0 280px; /* Không cho card bị co lại, giữ cố định 280px */
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #fff;
+    border: 8px solid #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Đảm bảo link không làm thay đổi màu chữ */
+.member-card a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.member-photo {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Giữ tỉ lệ ảnh không bị móp */
+}
+
+/* Thanh điều khiển */
+.phone-controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.home-button {
+    width: 40px;
+    height: 40px;
+    background: #333;
+    border-radius: 50%;
+}
+
+.phone-controls button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+}
+.teacher-messages {
+    padding: 60px 20px;
+    background: transparent;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.message-card {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+/* Container tổng */
+.teacher-section {
+    padding: 100px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.teacher-card {
+    display: flex;
+    align-items: center; /* Căn giữa avatar và bảng theo chiều dọc */
+    gap: 50px; /* Khoảng cách giữa avatar và bảng */
+    margin-bottom: 120px;
+}
+
+/* Sticker thầy cô */
+.avatar-sticker-wrapper {
+    position: relative;
+    flex-shrink: 0; /* Không cho avatar bị bóp nhỏ */
+}
+
+.teacher-sticker {
+    width: 320px; /* Tăng kích thước to hơn theo ý bạn */
+    height: auto;
+    /* Hiệu ứng viền trắng nhãn dán sắc nét hơn */
+    filter: drop-shadow(4px 4px 0 white) 
+            drop-shadow(-4px -4px 0 white) 
+            drop-shadow(4px -4px 0 white) 
+            drop-shadow(-4px 4px 0 white)
+            drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: bottom center;
+}
+
+/* Hiệu ứng khi di chuột vào: Lắc lư ngộ nghĩnh */
+.avatar-sticker-wrapper:hover .teacher-sticker {
+    transform: scale(1.1) rotate(5deg);
+    animation: wiggle 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes wiggle {
+    0% { transform: scale(1.1) rotate(5deg); }
+    100% { transform: scale(1.1) rotate(-5deg); }
+}
+/* Tag tên hiện đại */
+.sticker-name-tag {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    background: #ff7675;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    white-space: nowrap;
+    transition: 0.3s ease;
+    z-index: 10;
+}
+
+.avatar-sticker-wrapper:hover .sticker-name-tag {
+    transform: translateX(-50%) scale(1);
+    top: -50px;
+}
+
+/* Bảng phấn */
+.chalkboard {
+    background: #1e3a2d; /* Màu xanh bảng học đường */
+    border: 12px solid #5d4037; /* Viền gỗ dày */
+    border-radius: 8px;
+    padding: 40px;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.4), 10px 10px 20px rgba(0,0,0,0.2);
+    flex-grow: 1;
+}
+
+.chalk-text {
+    font-family: 'Caveat', cursive; /* Nhớ import font này */
+    color: white;
+    font-size: 1.6rem;
+    line-height: 1.5;
+}
+
+.chalk-signature {
+    text-align: right;
+    margin-top: 20px;
+    color: #ffd700; /* Màu vàng phấn */
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+}
+
+/* Tạo thêm một chút bụi phấn giả lập */
+.chalkboard::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('https://www.transparenttextures.com/patterns/chalkboard.png');
+    opacity: 0.3;
+    pointer-events: none;
+}
+.memory-wall-section {
+    padding: 80px 20px;
+    background-color: #f0f0f0; /* Màu nền tường nhạt */
+    background-image: radial-gradient(#d1d1d1 1px, transparent 1px); /* Họa tiết chấm nhỏ cho tường */
+    background-size: 20px 20px;
+    text-align: center;
+}
+
+.wall-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5rem;
+    color: #2d3436;
+    margin-bottom: 10px;
+}
+
+.wall-subtitle {
+    font-style: italic;
+    color: #636e72;
+    margin-bottom: 50px;
+}
+
+.sticky-notes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.sticky-note {
+    width: 250px;
+    min-height: 250px;
+    padding: 25px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+/* Các màu sắc khác nhau cho giấy Note */
+.note-yellow { background-color: #fff27e; transform: rotate(-2deg); }
+.note-blue   { background-color: #7efaff; transform: rotate(3deg); }
+.note-pink   { background-color: #ff7eb9; transform: rotate(-1deg); }
+.note-green  { background-color: #a2ff7e; transform: rotate(2deg); }
+
+.sticky-note:hover {
+    transform: scale(1.1) rotate(0deg) !important;
+    box-shadow: 10px 10px 25px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+.note-content {
+    font-family: 'Caveat', cursive; /* Font chữ viết tay */
+    font-size: 1.3rem;
+    line-height: 1.4;
+    text-align: left;
+    color: #2d3436;
+}
+
+.note-footer {
+    text-align: right;
+    font-family: 'Caveat', cursive;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-top: 1px dashed rgba(0,0,0,0.1);
+    padding-top: 10px;
+}
+.class-members-section {
+    padding: 50px 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.members-carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.members-wrapper {
+    width: 80%; /* Chiều rộng khung hiển thị */
+    overflow: hidden; /* Ẩn các thẻ nằm ngoài khung */
+}
+
+.members-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    padding: 20px 0;
+}
+
+/* Định dạng thẻ thành viên giống hình mẫu */
+.member-card {
+    min-width: 280px; /* Độ rộng mỗi thẻ */
+    height: 400px;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    position: relative;
+    border: 8px solid #fff; /* Viền trắng dày xung quanh */
+}
+
+.member-photo {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.member-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lớp phủ tên phía dưới ảnh */
+.member-name-overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 10px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Nút điều hướng */
+.nav-btn {
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 2rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.nav-btn:hover {
+    background: #fff;
+    transform: scale(1.1);
+}
+.music-card {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    width: 250px;
+    z-index: 100;
+    border: 1px solid #dcd0b9;
+}
+
+.handwriting-sm {
+    font-family: 'Dancing Script', cursive;
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    color: #8b4513;
+}
+
+#playlist {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.track {
+    padding: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    border-bottom: 1px dashed #eee;
+}
+
+.track:hover {
+    background: #fdf5e6;
+}
+
+.track.active {
+    background: #8b4513;
+    color: white;
+    font-weight: bold;
+}
+
+#main-audio {
+    width: 100%;
+    height: 30px;
+}
+
+.note {
+    font-size: 0.7rem;
+    font-style: italic;
+    margin-top: 5px;
+    color: #661;
+}
+        </style>
+        
+</head>
+<body>
+    <nav class="navbar">
+   
+    <ul class="nav-links">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="hoatdong.html">Hoạt động</a></li>
+        <li><a href="thanhvienlop.html">Thành viên lớp</a></li>
+    </ul>
+</nav>
+    <div class="home-wrapper">
+    <header class="hero-banner">
+        <img src="anhs/anhtau.png" alt="Graduation A7K23" class="banner-img">
+        <div class="banner-overlay">
+            </div>
+    </header>
+
+   
+    <section class="class-memories">
+    <div class="memory-container">
+        <h3 class="memory-title reveal">Chuyến tàu khởi hành mang số hiệu A7K23</h3>
+        <div class="memory-content">
+            <p class="reveal">3 năm chúng mình đã bên nhau, được rực rỡ như một bông hoa mang sắc riêng của chính mình. 
+                Tất cả chúng mình đều giống nhau, sống dưới ánh mặt trời và sống cả trong bóng tối. Lắm thăng trầm vậy 
+                mà không thể xoá những vết phai kí ức thanh xuân của bọn mình.</p>
+            <p class="reveal">Một đoàn tàu mang số hiệu A7K23 sẽ khởi hành khi chúng ta đã hoàn thành kì thi quan trọng nhất 
+                của cuộc đời, trút bỏ hết âu lo đã từng giăng kín tâm hồn của bọn mình bởi con điểm số. Trước khi khởi hành, 
+                có một nơi sẽ lưu lại những thước phim quý giá của bọn mình, được vun đắp bằng số lần mỉm cười, số lần bọn mình 
+                chưa từng buông tay nhau. </p>
+            <p class="reveal">Có một bạn hỏi mình là “Khi nào “nơi này” sẽ biến mất?”, mình ngập ngừng khá lâu rồi đáp lại 
+                với bạn đó: “Nếu nó bị xoá bởi ai đó hay mọi người quên cách tìm ra nơi này đi chăng nữa “nơi này” sẽ không
+                 bao giờ biến mất, chỉ khi biến mất khi bọn mình hoá thành người dưng giữa dòng đời vạn biến, không còn 
+                 nhớ gì về nhau”.</p>
+        </div>
+    </div>
+</section>
+<script>
+    function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight; // Chiều cao màn hình
+        var elementTop = reveals[i].getBoundingClientRect().top; // Khoảng cách từ phần tử đến đỉnh màn hình
+        var elementVisible = 100; // Khoảng cách xuất hiện sớm hay muộn (100px)
+
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+        } 
+        // Nếu muốn khi cuộn ngược lên chữ lại biến mất thì thêm else ở đây:
+        // else { reveals[i].classList.remove("active"); }
+    }
+}
+
+// Lắng nghe sự kiện cuộn chuột
+window.addEventListener("scroll", reveal);
+
+// Chạy hàm ngay khi load trang để hiện những gì đang nằm trong tầm mắt
+reveal();
+</script>
+ <div class="music-card">
+    <h3 class="handwriting-sm">Giai điệu kỷ niệm</h3>
+    <ul id="playlist">
+        <li class="track active" data-src="sounds/nhacalittledreamofme.mp3">1. A Little Dream Of Me - Ost Cám ơn người
+            đã thức cùng tôi
+        </li>
+        <li class="track" data-src="sounds/nhaccamonnguoidathuccungtoi.mp3 ">2. Cám ơn người đã thức cùng tôi - Ost Cám ơn người
+            đã thức cùng tôi</li>
+        <li class="track" data-src="sounds/nhacminhcungnhaudongbang.mp3">3. Mình Cùng Nhau Đóng Băng</li>
+        <li class="track" data-src="sounds/nhacmaiminhxa.mp3">4. Mai mình xa - Thịnh Suy</li>
+    </ul>
+    <audio id="main-audio" controls>
+        <source src="sounds/nhacalittledreamofme.mp3" type="audio/mpeg">
+    </audio>
+    <p class="note">* Trình duyệt có thể chặn tự động phát, hãy nhấn Play lần đầu nhé. Cám ơn mọi người đã nghe Playlist của chúng mình 😍😘😘</p>
+</div>
+        </div>
+    </div>
+    <script>
+        const audio = document.getElementById('main-audio');
+const tracks = document.querySelectorAll('.track');
+
+tracks.forEach(track => {
+    track.addEventListener('click', () => {
+        // 1. Xóa trạng thái active cũ
+        document.querySelector('.track.active').classList.remove('active');
+        
+        // 2. Thêm active cho bài vừa chọn
+        track.classList.add('active');
+        
+        // 3. Đổi nguồn nhạc và phát
+        const source = track.getAttribute('data-src');
+        audio.src = source;
+        audio.play();
+    });
+});
+
+// Tự động chuyển bài khi kết thúc (tùy chọn)
+audio.addEventListener('ended', () => {
+    let currentTrack = document.querySelector('.track.active');
+    let nextTrack = currentTrack.nextElementSibling || tracks[0];
+    nextTrack.click();
+});
+
+    </script>
+<section class="memory-gallery">
+    <div class="main-title-section">
+        <h1 class="main-kỷ-yếu-title">Thanh xuân chúng mình có nhau</h1>
+    </div>
+
+    <div class="camera-container">
+        <img src="anhs/anhlop10chungminh.png" class="camera-bg" alt="Kỷ niệm lớp">
+        <section class="main-title-section">
+    <h1 class="main-kỷ-yếu-title">Iphone của A7 nè!</h1>
+</section>
+<section class="phone-memories-section">
+    <div class="phone-wrapper">
+        <div class="phone-case">
+            <div class="phone-screen">
+                <div class="photo-slider" id="photoSlider">
+                    <img src="anhs/kyniem1.jpg" class="active" alt="Kỷ niệm 1">
+                    <img src="anhs/kyniem2.jpg" alt="Kỷ niệm 2">
+                    <img src="anhs/kyniem3.jpg" alt="Kỷ niệm 3">
+                    <img src="anhs/kyniem4.jpg" alt="Kỷ niệm 4">
+                     <img src="anhs/kyniem5.jpg" alt="Kỷ niệm 4">
+                      <img src="anhs/kyniem6.jpg" alt="Kỷ niệm 4">
+                       <img src="anhs/kyniem7.jpg" alt="Kỷ niệm 4">
+                        <img src="anhs/kyniem8.jpg" alt="Kỷ niệm 4">
+                         <img src="anhs/kyniem9.jpg" alt="Kỷ niệm 4">
+                          <img src="anhs/kyniem10.jpg" alt="Kỷ niệm 4">
+                           <img src="anhs/kyniem11.jpg" alt="Kỷ niệm 4">
+                            <img src="anhs/kyniem12.jpg" alt="Kỷ niệm 4">
+                             <img src="anhs/kyniem13.jpg" alt="Kỷ niệm 4">
+                              <img src="anhs/kyniem14.jpg" alt="Kỷ niệm 4">
+                               <img src="anhs/kyniem15.jpg" alt="Kỷ niệm 4">
+                                <img src="anhs/kyniem16.jpg" alt="Kỷ niệm 4">
+                                <img src="anhs/kyniem17.jpg" alt="Kỷ niệm 4">
+                                <img src="anhs/kyniem18.jpg" alt="Kỷ niệm 4">
+                                <img src="anhs/kyniem19.jpg" alt="Kỷ niệm 4">
+                                <img src="anhs/kyniem20.jpg" alt="Kỷ niệm 4">
+                </div>
+                
+                <div class="app-overlay">
+                    <div class="top-bar">
+                        <span class="time">12:07</span>
+                        <div class="status-icons">📶 🔋</div>
+                    </div>
+                    <div class="side-icons">
+                        <span>❤️</span>
+                        <span>💬</span>
+                        <span>🔗</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phone-controls">
+                <button onclick="prevPhoto()">◀️ Trước</button>
+                <div class="home-button"></div>
+                <button onclick="nextPhoto()">Sau ▶️</button>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    let currentPhotoIndex = 0;
+const photos = document.querySelectorAll('#photoSlider img');
+
+function showPhoto(index) {
+    // Ẩn ảnh hiện tại
+    photos[currentPhotoIndex].classList.remove('active');
+    
+    // Cập nhật index mới (quay vòng nếu hết ảnh)
+    currentPhotoIndex = (index + photos.length) % photos.length;
+    
+    // Hiện ảnh mới
+    photos[currentPhotoIndex].classList.add('active');
+}
+
+function nextPhoto() {
+    showPhoto(currentPhotoIndex + 1);
+}
+
+function prevPhoto() {
+    showPhoto(currentPhotoIndex - 1);
+}
+</script>
+ <section class="class-memories">
+    <div class="memory-container">
+        <h3 class="memory-title reveal">3 năm học liệu chúng mình có hiểu nhau không?</h3>
+        <div class="memory-content">
+            <p class="reveal">Có lần bọn mình giận hờn với nhau vì đọc tin nhắn mà chỉ seen, đôi lúc bọn mình cãi vã vì hối 
+                cả nhau đi tập văn nghệ, nhiều lần muốn từ mặt chỉ vì nói không hay, nhiều khi trong tâm trí mình cứ nói 
+                “Ước gì muốn đổi sang lớp khác”. Thế vậy sao bọn mình vẫn gắn bó với nhau suốt 3 năm?</p>
+            <p class="reveal">Vì bọn mình nhận ra rằng: Sự gắn bó không đo bằng số lần mỉm cười, mà đo bằng số lần giận hờn 
+                nhưng vẫn không buông tay. Sau mỗi trận cãi vã tập văn nghệ là niềm vui vỡ òa khi cả lớp cùng tỏa sáng trên 
+                sân khấu. Tối qua mới giận hờn mà sáng nay kiểm tra Địa thì cho xem đáp án để chép câu trả lời. Có lẽ chẳng 
+                ai hiểu được những trò đùa “vô tri” của mình bằng các cậu. </p>
+            <p class="reveal">Hóa ra, bọn mình không phải là những mảnh ghép hoàn hảo, mà là những mảnh ghép dám vì nhau 
+                mà đi cùng trên một con đường hành trang tương lai. Cảm ơn vì đã không để mình “đổi lớp” thành công, để 
+                giờ đây khi sắp phải đi thật, điều duy nhất mình ước lại là:  “Ước gì thời gian quay trở lại ngày đầu tiên.”</p>
+        </div>
+    </div>
+</section>
+<script>
+    function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight; // Chiều cao màn hình
+        var elementTop = reveals[i].getBoundingClientRect().top; // Khoảng cách từ phần tử đến đỉnh màn hình
+        var elementVisible = 100; // Khoảng cách xuất hiện sớm hay muộn (100px)
+
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+        } 
+        // Nếu muốn khi cuộn ngược lên chữ lại biến mất thì thêm else ở đây:
+        // else { reveals[i].classList.remove("active"); }
+    }
+}
+
+// Lắng nghe sự kiện cuộn chuột
+window.addEventListener("scroll", reveal);
+
+// Chạy hàm ngay khi load trang để hiện những gì đang nằm trong tầm mắt
+reveal();
+</script>
+   <section class="main-title-section">
+    <h1 class="main-kỷ-yếu-title">Lời nhắn nhủ của thầy cô muốn gửi tới A7 nè!</h1>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/cotruc.jpng" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Trúc - Lịch sử ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Càng yêu Sử thì các em lại càng yêu đồng bào, đất nước của mình hơn"
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/cohau.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Hậu - Địa lí ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Nếu các con học nhiều thì các con càng muốn yêu đất nước này, không chỉ yêu thiên nhiên mà yêu cả những con người chất phác nơi đây"
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/thayviet.png" alt="Thầy giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Thầy Việt - Địa lí ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Các con phải biết ứng dụng thực tiễn vào đời sống, lỡ đâu gg maps chỉ sai đường thì biết quay đầu còn kịp"
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/coan.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô An - Tin học ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Tin học không có khô khan như các em nghĩ đâu. Nếu các em biết tìm tòi thì các em sẽ biết được nhiều thứ hơn là trong sách giáo khoa."
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/cogiao.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Giao - Lịch sử ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Câu này mà sai thì em đừng chọn môn Sử của cô để đi thi tốt nghiệp nhé."
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/cothoan.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Thoan - Giáo dục KTPL ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Môn này là môn dễ học nhất và dễ điểm cao nhất, ráng chăm chỉ lên nha các em"
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/codieu.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Diệu - Chủ nhiệm lớp 12A7 ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Lớp mình phải mang giải về cho cô nhé, không phải là giải nhất từ dưới đến lên đâu."
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/cohuong.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Đặng Hương - Ngữ Văn ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Sao vô lớp mà cô ngửi toàn thấy mùi đồ ăn vậy ta, chưa ăn sáng mà cứ bắt ngửi mùi đồ ăn vậy đó!"
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/congan.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Ngân - Ngữ văn ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Cái lớp này ngộ ha, mỗi lần giảng là nửa lớp nằm gục xuống bàn vậy đó!"
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/cothuy.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Thuý - Lịch sử ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Mấy đứa này không chịu học bài gì hết, biết bao nhiêu lần mới chịu gỡ điểm đây."
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/cothanh.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Thanh - Chủ nhiệm lớp 10A7 ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Toán có thể áp dụng trong đời sống hằng ngày của chúng ta, chẳng hạn như mặt phẳng của sàn vuông góc với bảng lớp hay tính chiều cao của cột cờ."
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/cokimanh.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Kim Anh - Chủ nhiệm lớp 11A7 ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Điểm Toán thấp vậy mà vẫn cười tươi như vậy chỉ có thể là A7 thôi."
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/colieu.png" alt="Cô giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Cô Liễu - Thể dục ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Có những bạn tập luyện rất chăm chỉ, nhưng cũng có những bạn ngồi bấm điện thoại thôi. Lần sau cô cho chạy 3 vòng sân phạt mấy em đó nha."
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/thaydat.png" alt="Thầy giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Thầy Đạt - Giáo dục quốc phòng ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Đây là năm 12 rồi, thầy sẽ tạo điều kiện để các em thi sớm để có nhiều gian học nhiều hơn nên đừng có thêm áp lực gì nhiều nha các con."
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="teacher-section">
+    <div class="teacher-card">
+        <div class="avatar-sticker-wrapper">
+            <img src="anhs/thaynhat.png" alt="Thầy giáo" class="teacher-sticker">
+            <div class="sticker-name-tag">Thầy Nhật - Anh văn ✨</div>
+        </div>
+        
+        <div class="chalkboard">
+            <div class="chalk-text">
+                "Mình học là phải hiểu bản chất của ngữ pháp, học vẹt thì sống không có bền đâu."
+            </div>
+            <div class="chalk-signature">- Thương gửi 12A7 -</div>
+        </div>
+    </div>
+</section>
+<section class="memory-wall-section">
+    <h2 class="wall-title">Lưu Bút Thời Gian - 12A7</h2>
+    <p class="wall-subtitle">Hãy để lại một mảnh ký ức tại đây...</p>
+
+    <div class="sticky-notes-container">
+        <div class="sticky-note note-yellow">
+            <div class="note-content">Tớ sẽ nhớ mãi những buổi chiều cả lũ đi phiêu khắp Trị An này</div>
+            <div class="note-footer">- Bạn N giấu tên -</div>
+        </div>
+
+        <div class="sticky-note note-blue">
+            <div class="note-content">Cảm ơn 12A7 vì đã là một phần thanh xuân rực rỡ nhất của tớ. 90 ngày nữa cùng nhau đỗ nguyện vọng 1 nha!</div>
+            <div class="note-footer">- Lớp trưởng -</div>
+        </div>
+
+        <div class="sticky-note note-pink">
+            <div class="note-content">Gửi người ngồi cùng bàn: Xin lỗi vì đôi lúc tớ hơi ồn ào, cảm ơn vì đã cho tớ mượn vở ghi suốt 3 năm qua.</div>
+            <div class="note-footer">- Bạn T giấu tên -</div>
+        </div>
+
+        <div class="sticky-note note-green">
+            <div class="note-content">Chúc cả lớp mình ai cũng tìm được đam mê và sống hết mình với nó. Mãi yêu 12A7!</div>
+            <div class="note-footer">- Lớp phó -</div>
+        </div>
+    </div>
+</section>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .navbar {
+    position: fixed; /* Luôn cố định ở trên cùng khi cuộn trang */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    background: rgba(255, 255, 255, 0.8); /* Nền trắng trong suốt */
+    backdrop-filter: blur(10px); /* Làm mờ hậu cảnh */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000; /* Luôn nằm trên cùng các thành phần khác */
+    box-sizing: border-box;
+}
+
+.nav-logo {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #3498db;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 600;
+    transition: color 0.3s;
+    font-size: 1.1rem;
+}
+
+.nav-links a:hover {
+    color: #3498db; /* Đổi màu khi di chuột vào */
+}
+
+/* Thêm padding cho body để nội dung không bị thanh navbar che mất */
+body {
+    padding-top: 70px;
+}
+:root {
+    --retro-yellow: #f4ebd0;
+    --film-black: #1a1a1a;
+    --sepia-filter: sepia(0.3) contrast(1.1) brightness(0.9);
+}
+
+body {
+    background-color: var(--retro-yellow);
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--film-black);
+    overflow-x: hidden;
+}
+
+/* Hiệu ứng hạt nhiễu (Film Grain) */
+.film-grain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/stardust.png');
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 99;
+}
+
+/* Font chữ viết tay cho Quote */
+.handwriting {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 0;
+}
+
+/* Giả lập cuộn phim */
+.film-strip {
+    border-top: 20px dashed var(--film-black);
+    border-bottom: 20px dashed var(--film-black);
+    background: var(--film-black);
+    padding: 40px 0;
+    filter: var(--sepia-filter);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+video {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    border: 5px solid white;
+}
+
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+/* --- CSS TRƯỚC ĐÓ (giữ nguyên) --- */
+:root {
+    --retro-yellow: #f4ebd0;
+    --film-black: #1a1a1a;
+    --sepia-filter: sepia(0.3) contrast(1.1) brightness(0.9);
+    
+    /* Thêm màu cho hiệu ứng cháy phim */
+    --light-leak-color-1: rgba(255, 165, 0, 0.4); /* Màu cam đào */
+    --light-leak-color-2: rgba(255, 69, 0, 0.3);  /* Màu đỏ cam */
+}
+
+body {
+    background-color: var(--retro-yellow);
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--film-black);
+    overflow-x: hidden;
+}
+
+/* Hiệu ứng hạt nhiễu (Film Grain) (giữ nguyên) */
+.film-grain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/stardust.png');
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 99;
+}
+
+/* Font chữ viết tay cho Quote (giữ nguyên) */
+.handwriting {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 0;
+}
+
+/* Giả lập cuộn phim (giữ nguyên, nhưng có thể điều chỉnh filter) */
+.film-strip {
+    border-top: 20px dashed var(--film-black);
+    border-bottom: 20px dashed var(--film-black);
+    background: var(--film-black);
+    padding: 40px 0;
+    filter: var(--sepia-filter); /* Vẫn giữ sepia */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative; /* Thêm để hiệu ứng cháy phim hoạt động đúng */
+    overflow: hidden; /* Ngăn hiệu ứng tràn ra ngoài dải phim */
+}
+
+video {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    border: 5px solid white;
+}
+
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+/* --- CSS MỚI CHO HIỆU ỨNG CHÁY PHIM --- */
+
+/* Lớp chứa hiệu ứng cháy phim */
+.light-leaks::after {
+    content: "";
+    position: absolute;
+    top: -50%; /* Bắt đầu từ trên cùng */
+    left: -50%; /* Bắt đầu từ bên trái */
+    width: 200%; /* Đủ lớn để bao phủ toàn bộ vùng */
+    height: 200%;
+    
+    /* Tạo vệt sáng ngẫu nhiên bằng radial-gradient */
+    background-image: 
+        radial-gradient(circle at 30% 20%, var(--light-leak-color-1) 0%, transparent 40%),
+        radial-gradient(circle at 70% 60%, var(--light-leak-color-2) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, var(--light-leak-color-1) 0%, transparent 30%),
+        radial-gradient(circle at 90% 10%, var(--light-leak-color-2) 0%, transparent 45%);
+    
+    opacity: 0; /* Bắt đầu với độ mờ bằng 0 */
+    pointer-events: none; /* Không cản trở các tương tác khác (như nút play video) */
+    z-index: 2; /* Nằm trên video và film-strip nhưng dưới film-grain */
+    
+    /* Áp dụng hoạt ảnh nhấp nháy */
+    animation: flickerLightLeaks 8s infinite linear;
+}
+
+/* Định nghĩa hoạt ảnh nhấp nháy */
+@keyframes flickerLightLeaks {
+    0% { opacity: 0; transform: translate(0, 0); }
+    10% { opacity: 0.3; }
+    15% { opacity: 0.1; }
+    20% { opacity: 0.4; transform: translate(-5%, 5%); } /* Di chuyển nhẹ */
+    25% { opacity: 0.1; }
+    30% { opacity: 0.3; }
+    35% { opacity: 0; }
+    40% { opacity: 0.2; }
+    45% { opacity: 0.4; transform: translate(5%, -5%); } /* Di chuyển ngược lại */
+    50% { opacity: 0.1; }
+    60% { opacity: 0.3; }
+    70% { opacity: 0.1; }
+    80% { opacity: 0.4; }
+    90% { opacity: 0; }
+    100% { opacity: 0; transform: translate(0, 0); } /* Kết thúc hoạt ảnh */
+}
+/* --- CSS TRƯỚC ĐÓ (giữ nguyên) --- */
+:root {
+    --retro-yellow: #f4ebd0;
+    --film-black: #1a1a1a;
+    --sepia-filter: sepia(0.3) contrast(1.1) brightness(0.9);
+    
+    /* Thêm màu cho hiệu ứng cháy phim */
+    --light-leak-color-1: rgba(255, 165, 0, 0.4); /* Màu cam đào */
+    --light-leak-color-2: rgba(255, 69, 0, 0.3);  /* Màu đỏ cam */
+}
+
+body {
+    background-color: var(--retro-yellow);
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--film-black);
+    overflow-x: hidden;
+}
+
+/* Hiệu ứng hạt nhiễu (Film Grain) (giữ nguyên) */
+.film-grain {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/stardust.png');
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 99;
+}
+
+/* Font chữ viết tay cho Quote (giữ nguyên) */
+.handwriting {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 0;
+}
+
+/* Giả lập cuộn phim (giữ nguyên, nhưng có thể điều chỉnh filter) */
+.film-strip {
+    border-top: 20px dashed var(--film-black);
+    border-bottom: 20px dashed var(--film-black);
+    background: var(--film-black);
+    padding: 40px 0;
+    filter: var(--sepia-filter); /* Vẫn giữ sepia */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative; /* Thêm để hiệu ứng cháy phim hoạt động đúng */
+    overflow: hidden; /* Ngăn hiệu ứng tràn ra ngoài dải phim */
+}
+
+video {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    border: 5px solid white;
+}
+
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+/* --- CSS MỚI CHO HIỆU ỨNG CHÁY PHIM --- */
+
+/* Lớp chứa hiệu ứng cháy phim */
+.light-leaks::after {
+    content: "";
+    position: absolute;
+    top: -50%; /* Bắt đầu từ trên cùng */
+    left: -50%; /* Bắt đầu từ bên trái */
+    width: 200%; /* Đủ lớn để bao phủ toàn bộ vùng */
+    height: 200%;
+    
+    /* Tạo vệt sáng ngẫu nhiên bằng radial-gradient */
+    background-image: 
+        radial-gradient(circle at 30% 20%, var(--light-leak-color-1) 0%, transparent 40%),
+        radial-gradient(circle at 70% 60%, var(--light-leak-color-2) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, var(--light-leak-color-1) 0%, transparent 30%),
+        radial-gradient(circle at 90% 10%, var(--light-leak-color-2) 0%, transparent 45%);
+    
+    opacity: 0; /* Bắt đầu với độ mờ bằng 0 */
+    pointer-events: none; /* Không cản trở các tương tác khác (như nút play video) */
+    z-index: 2; /* Nằm trên video và film-strip nhưng dưới film-grain */
+    
+    /* Áp dụng hoạt ảnh nhấp nháy */
+    animation: flickerLightLeaks 8s infinite linear;
+}
+
+/* Định nghĩa hoạt ảnh nhấp nháy */
+@keyframes flickerLightLeaks {
+    0% { opacity: 0; transform: translate(0, 0); }
+    10% { opacity: 0.3; }
+    15% { opacity: 0.1; }
+    20% { opacity: 0.4; transform: translate(-5%, 5%); } /* Di chuyển nhẹ */
+    25% { opacity: 0.1; }
+    30% { opacity: 0.3; }
+    35% { opacity: 0; }
+    40% { opacity: 0.2; }
+    45% { opacity: 0.4; transform: translate(5%, -5%); } /* Di chuyển ngược lại */
+    50% { opacity: 0.1; }
+    60% { opacity: 0.3; }
+    70% { opacity: 0.1; }
+    80% { opacity: 0.4; }
+    90% { opacity: 0; }
+    100% { opacity: 0; transform: translate(0, 0); } /* Kết thúc hoạt ảnh */
+}
+.music-card {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+    width: 250px;
+    z-index: 100;
+    border: 1px solid #dcd0b9;
+}
+
+.handwriting-sm {
+    font-family: 'Dancing Script', cursive;
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+    color: #8b4513;
+}
+
+#playlist {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.track {
+    padding: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    border-bottom: 1px dashed #eee;
+}
+
+.track:hover {
+    background: #fdf5e6;
+}
+
+.track.active {
+    background: #8b4513;
+    color: white;
+    font-weight: bold;
+}
+
+#main-audio {
+    width: 100%;
+    height: 30px;
+}
+
+.note {
+    font-size: 0.7rem;
+    font-style: italic;
+    margin-top: 5px;
+    color: #661;
+}
+.gallery {
+    padding: 50px 10%;
+    background: rgba(26, 26, 26, 0.05); /* Nền tối nhẹ để nổi bật ảnh */
+}
+
+.year-block {
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+.year-block.right {
+    align-items: flex-end;
+    text-align: right;
+}
+
+/* Tạo hiệu ứng khung ảnh Polaroid */
+.polaroid-frame {
+    background: white;
+    padding: 15px 15px 30px 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: inline-block;
+    transition: transform 0.3s ease;
+    max-width: 300px;
+}
+
+.polaroid-frame img {
+    width: 100%;
+    height: auto;
+    filter: sepia(0.2); /* Ám màu cũ nhẹ */
+}
+
+.caption {
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* --- CẬP NHẬT ĐOẠN NÀY --- */
+.polaroid-frame {
+    background: white;
+    padding: 15px 15px 30px 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: inline-block;
+    transition: transform 0.3s ease;
+    max-width: 250px; /* Điều chỉnh kích thước ảnh phù hợp */
+    vertical-align: top;
+    /* Gán một góc nghiêng cố định cho TẤT CẢ các ảnh */
+    transform: rotate(-1.5deg); /* Nghiêng nhẹ sang trái */
+    
+    /* Mẹo: Nếu bạn muốn tất cả ảnh đều thẳng đứng, hãy đổi thành: rotate(0deg); */
+}
+
+.polaroid-frame:hover {
+    transform: scale(1.05) rotate(0deg);
+    z-index: 10;
+}
+
+/* Container bao quanh TV */
+.tv-container {
+    width: 320px;
+    margin: 20px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* Thân máy Tivi */
+.tv-case {
+    background: #5d4037; /* Màu gỗ nâu */
+    padding: 15px;
+    border-radius: 15px;
+    position: relative;
+    border: 4px solid #3e2723;
+    display: flex;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
+}
+
+/* Màn hình Tivi */
+.tv-screen {
+    background: #000;
+    width: 220px;
+    height: 160px;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    border: 8px solid #a1887f;
+}
+
+.tv-screen video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(0.3) contrast(1.2); /* Tạo hiệu ứng phim cũ cho video */
+}
+
+/* Các nút vặn tivi */
+.tv-controls {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding-left: 10px;
+}
+
+.knob {
+    width: 15px;
+    height: 15px;
+    background: #3e2723;
+    border-radius: 50%;
+    border: 2px solid #8d6e63;
+}
+
+.speaker-grill {
+    width: 25px;
+    height: 40px;
+    background: repeating-linear-gradient(
+        transparent,
+        transparent 3px,
+        #3e2723 3px,
+        #3e2723 6px
+    );
+}
+
+/* Chân tivi */
+.tv-legs {
+    width: 100%;
+    height: 20px;
+    position: relative;
+}
+
+.tv-legs::before, .tv-legs::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 20px;
+    background: #3e2723;
+    top: 0;
+}
+.tv-legs::before { left: 40px; transform: rotate(20deg); }
+.tv-legs::after { right: 40px; transform: rotate(-20deg); }
+
+.tv-label {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    color: #5d4037;
+    margin-top: 10px;
+}
+
+/* Hiệu ứng nhiễu khi chưa phát video (tùy chọn) */
+.tv-static {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    
+    opacity: 0.1;
+    pointer-events: none;
+}
+/* Tạo các đường kẻ ngang đặc trưng của Tivi cũ */
+.tv-screen::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.1) 50%
+    ), linear-gradient(
+        90deg, 
+        rgba(255, 0, 0, 0.03), 
+        rgba(0, 255, 0, 0.01), 
+        rgba(0, 0, 255, 0.03)
+    );
+    background-size: 100% 3px, 3px 100%; /* Các đường kẻ mảnh */
+    pointer-events: none; /* Để vẫn bấm được nút Play của video */
+    z-index: 2;
+}
+
+/* Hiệu ứng bóng gương ở góc màn hình */
+.tv-screen::after {
+    content: "";
+    position: absolute;
+    top: 5px; left: 5px;
+    width: 40%; height: 20%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: skewX(-20deg);
+    border-radius: 50%;
+    filter: blur(5px);
+    pointer-events: none;
+    z-index: 3;
+}
+.grand-tv-container {
+    max-width: 850px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.tv-main-case {
+    background: #4e342e; /* Màu gỗ đậm hơn */
+    padding: 30px;
+    border-radius: 25px;
+    border: 8px solid #3e2723;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.tv-screen-area {
+    flex: 3;
+    background: #000;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    border: 10px solid #795548;
+    aspect-ratio: 16 / 9;
+}
+
+#tv-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Panel điều khiển bên phải */
+.tv-side-panel {
+    flex: 1;
+    background: #3e2723;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #d7ccc8;
+}
+
+.tv-brand {
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    opacity: 0.6;
+}
+
+.channel-selector p {
+    font-size: 0.7rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.tv-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #5d4037;
+    border: 2px solid #8d6e63;
+    color: white;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.tv-btn:hover { background: #795548; }
+.tv-btn.active {
+    background: #ff5722; /* Màu cam nổi bật khi đang chọn */
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.5);
+}
+
+.speaker-holes {
+    height: 60px;
+    background: radial-gradient(#222 20%, transparent 20%);
+    background-size: 8px 8px;
+    opacity: 0.5;
+}
+
+.power-light {
+    width: 10px;
+    height: 10px;
+    background: #f44336;
+    border-radius: 50%;
+    margin: 0 auto;
+    box-shadow: 0 0 5px red;
+}
+/* Tạo sợi dây thừng chạy ngang qua vùng chứa ảnh */
+.photo-display {
+    position: relative;
+    padding-top: 60px; /* Tạo không gian cho dây và kẹp */
+    border-top: 3px solid #8d6e63; /* Sợi dây thừng màu nâu */
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Tinh chỉnh lại khung ảnh để khớp với kẹp */
+.polaroid-frame {
+    background: white;
+    padding: 15px 15px 30px 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    display: inline-block;
+    vertical-align: top;
+    position: relative; /* Để căn vị trí chiếc kẹp */
+    transition: transform 0.3s ease;
+    max-width: 250px;
+    margin: 20px 10px;
+    z-index: 1;
+}
+
+/* Vẽ chiếc kẹp gỗ bằng CSS */
+.clip {
+    width: 20px;
+    height: 50px;
+    background: #d2b48c; /* Màu gỗ sáng */
+    position: absolute;
+    top: -25px; /* Đẩy kẹp lên trên để kẹp vào dây */
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    z-index: 2;
+    border: 1px solid #bc9b6a;
+}
+
+/* Thêm lò xo sắt cho chiếc kẹp */
+.clip::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #777; /* Màu kim loại */
+    border-radius: 2px;
+}
+
+/* Hiệu ứng khi di chuột vào: Ảnh đung đưa nhẹ */
+.polaroid-frame:hover {
+    transform: scale(1.05) rotate(2deg);
+    z-index: 10;
+}
+    </style>
+</head>
+<body>
+     <nav class="navbar">
+   
+    <ul class="nav-links">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="hoatdong.html">Hoạt động</a></li>
+        <li><a href="thanhvienlop.html">Thành viên lớp</a></li>
+    </ul>
+</nav>
+   <div class="film-grain"></div> <div class="container">
+        <header>
+            <h1 class="handwriting">Một đoạn thước phim nhỏ...</h1>
+            <p>Niên khóa 2023 - 2026</p>
+        </header>
+
+        <main class="video-section">
+            <div class="film-strip light-leaks"> <video controls loop>
+                    <source src="videos/video83311.mp4" type="video/mp4">
+                </video>
+            </div>
+        </main>
+
+       <div class="music-card">
+    <h3 class="handwriting-sm">Giai điệu kỷ niệm</h3>
+    <ul id="playlist">
+        <li class="track active" data-src="sounds/nhacalittledreamofme.mp3">1. A Little Dream Of Me - Ost Cám ơn người
+            đã thức cùng tôi
+        </li>
+        <li class="track" data-src="sounds/nhaccamonnguoidathuccungtoi.mp3">2. Cám ơn người đã thức cùng tôi - Ost Cám ơn người
+            đã thức cùng tôi</li>
+        <li class="track" data-src="sounds/nhacminhcungnhaudongbang.mp3">3. Mình Cùng Nhau Đóng Băng</li>
+        <li class="track" data-src="sounds/nhacmaiminhxa.mp3">4. Mai mình xa - Thịnh Suy</li>
+    </ul>
+    <audio id="main-audio" controls>
+        <source src="sounds/nhacalittledreamofme.mp3" type="audio/mpeg">
+    </audio>
+    <p class="note">* Trình duyệt có thể chặn tự động phát, hãy nhấn Play lần đầu nhé. Cám ơn mọi người đã nghe Playlist của chúng mình 😍😘😘</p>
+</div>
+        </div>
+    </div>
+    <script>
+        const audio = document.getElementById('main-audio');
+const tracks = document.querySelectorAll('.track');
+
+tracks.forEach(track => {
+    track.addEventListener('click', () => {
+        // 1. Xóa trạng thái active cũ
+        document.querySelector('.track.active').classList.remove('active');
+        
+        // 2. Thêm active cho bài vừa chọn
+        track.classList.add('active');
+        
+        // 3. Đổi nguồn nhạc và phát
+        const source = track.getAttribute('data-src');
+        audio.src = source;
+        audio.play();
+    });
+});
+
+// Tự động chuyển bài khi kết thúc (tùy chọn)
+audio.addEventListener('ended', () => {
+    let currentTrack = document.querySelector('.track.active');
+    let nextTrack = currentTrack.nextElementSibling || tracks[0];
+    nextTrack.click();
+});
+
+    </script>
+    <section class="gallery">
+    <div class="year-block left">
+        <h2 class="handwriting">Lớp 10: Ngây ngô ngày đầu</h2>
+        <div class="photo-display">
+            <div class="polaroid-frame">
+                <div class="clip"></div><img src="anhs/10.2" alt="Kỷ niệm lớp 10">
+            </div>
+            <div class="polaroid-frame ">
+                <div class="clip"></div><img src="anhs/10.3" alt="Kỷ niệm lớp 10">
+            </div>
+             <div class="polaroid-frame ">
+                <div class="clip"></div><img src="anhs/10.1" alt="Kỷ niệm lớp 10">
+            </div>
+             <div class="polaroid-frame ">
+                <div class="clip"></div><img src="anhs/10.4" alt="Kỷ niệm lớp 10">
+            </div>
+              <div class="polaroid-frame ">
+                <div class="clip"></div><img src="anhs/kyniem14.jpg" alt="Kỷ niệm lớp 10">
+            </div>
+              <div class="polaroid-frame ">
+                <div class="clip"></div><img src="anhs/kyniem20.jpg" alt="Kỷ niệm lớp 10">>
+            </div>
+              <div class="polaroid-frame ">
+                <div class="clip"></div><img src="anhs/kyniem15.jpg" alt="Kỷ niệm lớp 10">
+            </div>
+        </div>
+
+    </div>
+
+
+      
+    <div class="year-block right">
+        <h2 class="handwriting">Lớp 11: Rực rỡ nắng hè</h2>
+<div class="photo-display">
+    <div class="polaroid-frame">
+        <div class="clip"></div>
+        <img src="anhs/kyniem19.jpg" alt="Kỷ niệm lớp 11">
+    </div>
+    <div class="polaroid-frame"> <div class="clip"></div>
+        <img src="anhs/11.2" alt="Kỷ niệm lớp 11">
+        </div> <div class="polaroid-frame">
+        <div class="clip"></div>
+        <img src="anhs/11.3" alt="Kỷ niệm lớp 11">
+    </div>
+     <div class="polaroid-frame"> <div class="clip"></div>
+        <img src="anhs/11.4" alt="Kỷ niệm lớp 11">
+        </div> <div class="polaroid-frame">
+        <div class="clip"></div>
+        <img src="anhs/kyniem10.jpg" alt="Kỷ niệm lớp 11">
+    </div>
+    </div>
+
+
+   
+   <div class="year-block left">
+    <h2 class="handwriting">Lớp 12: Mùa của trái chín</h2>
+    
+    <div class="photo-display">
+        
+        <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.1" alt="Kỷ niệm lớp 12">
+        </div>
+
+        <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.2" alt="Kỷ niệm lớp 12">
+        </div>
+
+        <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.3" alt="Kỷ niệm lớp 12">
+        </div>
+  <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.4" alt="Kỷ niệm lớp 12">
+        </div>
+          <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.5" alt="Kỷ niệm lớp 12">
+        </div>
+          <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.6" alt="Kỷ niệm lớp 12">
+        </div>
+          <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.7" alt="Kỷ niệm lớp 12">
+        </div>
+          <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.8" alt="Kỷ niệm lớp 12">
+        </div>
+          <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.9" alt="Kỷ niệm lớp 12">
+        </div>
+          <div class="polaroid-frame">
+            <div class="clip"></div>
+            <img src="anhs/12.10" alt="Kỷ niệm lớp 12">
+        </div>
+
+    </div> </div>
+   
+    <div class="grand-tv-container">
+    <div class="tv-main-case">
+        <div class="tv-screen-area">
+            <video id="tv-video" controls poster="images/poster-main.jpg">
+                <source src="videos/lop10.mp4" type="video/mp4">
+            </video>
+            <div class="tv-scanlines"></div>
+        </div>
+        
+        <div class="tv-side-panel">
+            <h3 class="tv-brand">RETRO-VISION</h3>
+            <div class="channel-selector">
+                <p>Chọn năm học:</p>
+                
+                <button class="tv-btn active" data-video="videos/videolop10.mp4 " data-title="Kỷ niệm Lớp 10">Kênh 10</button>
+                <button class="tv-btn active" data-video="videos/video10.2 " data-title="Kỷ niệm Lớp 10">Kênh 10.2</button>
+                <button class="tv-btn" data-video="videos/Videotrochoi11.mp4" data-title="Kỷ niệm Lớp 11">Kênh 11</button>
+                <button class="tv-btn" data-video="videos/videocuoinam11.mp4" data-title="Kỷ niệm Lớp 11">Kênh 11.2</button>
+                <button class="tv-btn" data-video="videos/video83311.mp4" data-title="Kỷ niệm Lớp 11">Kênh 11.3</button>
+                <button class="tv-btn" data-video="videos/videobatngo11.mp4" data-title="Kỷ niệm Lớp 11">Kênh 11.4</button>
+                <button class="tv-btn" data-video="videos/video83.mp4" data-title="Kỷ niệm Lớp 12">Kênh 12</button>
+                <button class="tv-btn active" data-video="videos/video1.mp4" data-title="Kỷ niệm Lớp 10">Kênh 12.1</button>
+                 <button class="tv-btn" data-video="videos/Videobatngochoco.mp4" data-title="Kỷ niệm Lớp 12">Kênh 12.2</button>
+                  <button class="tv-btn" data-video="videos/Videolamcong.mp4" data-title="Kỷ niệm Lớp 12">Kênh 12.3</button>
+                  <button class="tv-btn" data-video="videos/Videokettraixuan.mp4" data-title="Kỷ niệm Lớp 12">Kênh 12.4</button>
+            </div>
+            <div class="speaker-holes"></div>
+            <div class="power-light"></div>
+        </div>
+    </div>
+    <h2 id="video-title" class="handwriting">Kỷ niệm 3 năm học cấp 3</h2>
+</div>
+<script>
+    const tvVideo = document.getElementById('tv-video');
+const videoTitle = document.getElementById('video-title');
+const tvBtns = document.querySelectorAll('.tv-btn');
+
+tvBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        // 1. Đổi trạng thái nút active
+        document.querySelector('.tv-btn.active').classList.remove('active');
+        this.classList.add('active');
+
+        // 2. Lấy thông tin từ data-attribute
+        const newSrc = this.getAttribute('data-video');
+        const newTitle = this.getAttribute('data-title');
+
+        // 3. Hiệu ứng "nhiễu" nhẹ khi chuyển kênh (tùy chọn)
+        tvVideo.style.opacity = 0;
+        
+        setTimeout(() => {
+            tvVideo.src = newSrc;
+            videoTitle.innerText = newTitle;
+            tvVideo.play();
+            tvVideo.style.opacity = 1;
+        }, 300); // Đợi 0.3s tạo cảm giác chuyển kênh
+    });
+});
+// Trong file script.js, phần xử lý click:
+btn.addEventListener('click', function() {
+    // Tạo hiệu ứng nhiễu khi bấm nút
+    tvVideo.style.filter = "brightness(2) contrast(3) blur(10px)"; 
+    tvVideo.style.opacity = "0.5";
+
+    setTimeout(() => {
+        const newSrc = this.getAttribute('data-video');
+        tvVideo.src = newSrc;
+        tvVideo.play();
+        
+        // Trả lại trạng thái bình thường
+        tvVideo.style.filter = "sepia(0.3) contrast(1.2)"; 
+        tvVideo.style.opacity = "1";
+    }, 200); // Hiệu ứng diễn ra trong 0.2 giây
+});
+</script>
+</section>
+</body>
+</html>

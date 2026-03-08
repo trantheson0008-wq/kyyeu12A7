@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+.navbar {
+    position: fixed; /* Luôn cố định ở trên cùng khi cuộn trang */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    background: rgba(255, 255, 255, 0.8); /* Nền trắng trong suốt */
+    backdrop-filter: blur(10px); /* Làm mờ hậu cảnh */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000; /* Luôn nằm trên cùng các thành phần khác */
+    box-sizing: border-box;
+}
+
+.nav-logo {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #3498db;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 600;
+    transition: color 0.3s;
+    font-size: 1.1rem;
+}
+
+.nav-links a:hover {
+    color: #3498db; /* Đổi màu khi di chuột vào */
+}
+
+/* Thêm padding cho body để nội dung không bị thanh navbar che mất */
+body {
+    padding-top: 70px;
+}
+    </style>
+
+</head>
+<body>
+      <nav class="navbar">
+   
+    <ul class="nav-links">
+        <li><a href="index.html">Trang chủ</a></li>
+        <li><a href="hoatdong.html">Hoạt động</a></li>
+        <li><a href="thanhvienlop.html">Thành viên lớp</a></li>
+    </ul>
+</nav>
+     <h1><center> <font color="red">Kỉ yếu lớp 12A7</font></h1></center>
+<h1><center> <font color="black">Thành viên lớp</font></h1></center>
+<table style="margin: 0 auto; width: 40%;" border="1">
+    <tr>
+        <th> STT</th>
+        <TH>Họ và tên</TH>
+        <th>Chức vụ</th>
+        <th>Ngày sinh</th>
+        <th>Lưu ý</th>
+    </tr>
+    <tr>
+        <td><center>1</center></td>
+        <td>Nguyễn Thị Khánh An</td>
+        <td><center>Thành viên</center></td>
+        <td><center>24/07/2008</center></td>
+        <td><center><a href="khanhan.html">Xem thêm</a></center></td>
+    </tr>
+ <tr>
+        <td><center>2</center></td>
+        <td>Trịnh Vũ Gia An</td>
+        <td><center>Thành viên</center></td>
+        <td><center>01/01/2008</center></td>
+        <td><center><a href="giaan.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>3</center></td>
+        <td>Nguyễn Thị Kim Anh</td>
+        <td><center>Thành viên</center></td>
+        <td><center>18/02/2008</center></td>
+        <td><center><a href="kimanh.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>4</center></td>
+        <td>Trần Thị Thúy Anh</td>
+        <td><center>Thành viên</center></td>
+        <td><center>19/11/2007</center></td>
+        <td><center><a href="thuyanh.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>5</center></td>
+        <td>Nguyễn Ngọc Bảo Châu</td>
+        <td><center>Thành viên</center></td>
+        <td><center>06/11/2007</center></td>
+        <td><center><a href="baochau.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>6</center></td>
+        <td>Lê Quang Minh Duy</td>
+        <td><center>Thành viên</center></td>
+        <td><center>19/09/2008</center></td>
+        <td><center><a href="minhduy.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>7</center></td>
+        <td>Mai Nguyễn Thanh Giang</td>
+        <td><center>Thành viên</center></td>
+        <td><center>05/08/2008</center></td>
+        <td><center><a href="thanhgiang.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>8</center></td>
+        <td>Lê Công Quốc Huy</td>
+        <td><center>Lớp phó lao động</center></td>
+        <td><center>28/05/2008</center></td>
+        <td><center><a href="quochuy.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>9</center></td>
+        <td>Phan Duy Khang</td>
+        <td><center>Thành viên</center></td>
+        <td><center>23/03/2007</center></td>
+        <td><center><a href="duykhang.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>10</center></td>
+        <td>Lê Quang Bảo Khánh</td>
+        <td><center>Thành viên</center></td>
+        <td><center>04/07/2007</center></td>
+        <td><center><a href="baokhanh.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>11</center></td>
+        <td>Lê Quang Minh Khôi</td>
+        <td><center>Tổ trưởng tổ 1</center></td>
+        <td><center>19/09/2008</center></td>
+        <td><center><a href="minhkhoi.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>12</center></td>
+        <td>Lê Thị Khánh Linh</td>
+        <td><center>Thành viên</center></td>
+        <td><center>27/04/2008</center></td>
+        <td><center><a href="khanhlinh.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>13</center></td>
+        <td>Trần Thùy Linh</td>
+        <td><center>Thành viên</center></td>
+        <td><center>30/10/2008</center></td>
+        <td><center><a href="thuylinh.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>14</center></td>
+        <td>Tằng Dứng Mành</td>
+        <td><center>Thành viên</center></td>
+        <td><center>26/11/2008</center></td>
+        <td><center><a href="manh.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>15</center></td>
+        <td>Lâm Hoàng Minh</td>
+        <td><center>Thành viên</center></td>
+        <td><center>30/01/2008</center></td>
+        <td><center><a href="minh.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>16</center></td>
+        <td>Đoàn Hà Kim Ngân</td>
+        <td><center>Thành viên</center></td>
+        <td><center>19/02/2008</center></td>
+        <td><center><a href="kimngan.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>17</center></td>
+        <td>Phạm Huỳnh Thanh Ngân</td>
+        <td><center>Thành viên</center></td>
+        <td><center>29/11/2008</center></td>
+        <td><center><a href="thanhngan.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>18</center></td>
+        <td>Sử Bảo Nghi</td>
+        <td><center>Bí thư</center></td>
+        <td><center>22/05/2008</center></td>
+        <td><center><a href="nghi.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>19</center></td>
+        <td>Nguyễn Bích Như Ngọc</td>
+        <td><center>Tổ trưởng tổ 4</center></td>
+        <td><center>11/05/2008</center></td>
+        <td><center><a href="nhungoc.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>20</center></td>
+        <td>Nguyễn Ngọc Nguyên</td>
+        <td><center>Thành viên</center></td>
+        <td><center>10/12/2008
+
+        </center></td>
+        <td><center><a href="ngocnguyen.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>21</center></td>
+        <td>Nguyễn Trung Nguyên</td>
+        <td><center>Thành viên</center></td>
+        <td><center>17/01/2008</center></td>
+        <td><center><a href="trungnguyen.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>22</center></td>
+        <td>Nguyễn Thị Thanh Nhàn</td>
+        <td><center>Thành viên</center></td>
+        <td><center>28/11/2008</center></td>
+        <td><center><a href="nguyennhan.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>23</center></td>
+        <td>Trần Thị Thanh Nhàn</td>
+        <td><center>Tổ trưởng tổ 2</center></td>
+        <td><center>30/05/2008</center></td>
+        <td><center><a href="trannhan.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>24</center></td>
+        <td>Đinh Văn Nhật</td>
+        <td><center>Thành viên</center></td>
+        <td><center>05/07/2008</center></td>
+        <td><center><a href="nhat.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>25</center></td>
+        <td>Đỗ Trần Thảo Nhi</td>
+        <td><center>Thành viên</center></td>
+        <td><center>21/04/2008</center></td>
+        <td><center><a href="thaonhi.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>26</center></td>
+        <td>Mai Thị Yến Nhi</td>
+        <td><center>Thành viên</center></td>
+        <td><center>12/01/2008</center></td>
+        <td><center><a href="mainhi.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>27</center></td>
+        <td>Nguyễn Thị Yến Nhi</td>
+        <td><center>Lớp phó</center></td>
+        <td><center>16/09/2008</center></td>
+        <td><center><a href="yennhi.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>28</center></td>
+        <td>Ninh Nguyễn Thanh Thúy Nhi</td>
+        <td><center>Thành viên</center></td>
+        <td><center>11/05/2008</center></td>
+        <td><center><a href="thuynhi.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>29</center></td>
+        <td>Vũ Thị Kiều Phương</td>
+        <td><center>Thành viên</center></td>
+        <td><center>20/09/2008</center></td>
+        <td><center><a href="kieuphuong.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>30</center></td>
+        <td>Trần Thế Sơn</td>
+        <td><center>Thành viên</center></td>
+        <td><center>30/10/2008</center></td>
+        <td><center><a href="son.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>31</center></td>
+        <td>Hoàng Thị Thu Thảo</td>
+        <td><center>Lớp trưởng</center></td>
+        <td><center>23/08/2008</center></td>
+        <td><center><a href="thuthao.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>32</center></td>
+        <td>Nguyễn Thanh Thảo</td>
+        <td><center>Thành viên</center></td>
+        <td><center>01/04/2008</center></td>
+        <td><center><a href="thanhthao.html"> Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>33</center></td>
+        <td>Trần Đình Thiên</td>
+        <td><center>Thành viên</center></td>
+        <td><center>15/02/2008</center></td>
+        <td><center><a href="thien.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>34</center></td>
+        <td>Vũ Nguyễn Thanh Thủy</td>
+        <td><center>Tổ trưởng tổ 3</center></td>
+        <td><center>19/08/2008</center></td>
+        <td><center><a href="thanhthuy.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>35</center></td>
+        <td>Tô Minh Thư</td>
+        <td><center>Thành viên</center></td>
+        <td><center>20/11/2008</center></td>
+        <td><center><a href="thu.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>36</center></td>
+        <td>Hoàng Thị Quỳnh Trâm</td>
+        <td><center>Thành viên</center></td>
+        <td><center>20/05/2008</center></td>
+        <td><center><a href="quynhtram.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>37</center></td>
+        <td>Lê Dương Thị Bích Trâm</td>
+        <td><center>Thành viên</center></td>
+        <td><center>09/02/2008</center></td>
+        <td><center><a href="bichtram.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>38</center></td>
+        <td>Nguyễn Ngọc Phương Trinh</td>
+        <td><center>Thành viên</center></td>
+        <td><center>29/12/2008</center></td>
+        <td><center><a href="trinh.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>39</center></td>
+        <td>Hoàng Thị Cẩm Tú</td>
+        <td><center>Thủ quỹ </center></td>
+        <td><center>02/12/2008</center></td>
+        <td><center><a href="tu.html">Xem thêm</a></center></td>
+    </tr>
+    <var> <tr>
+        <td><center>40</center></td>
+        <td>Phạm Minh Tuấn</td>
+        <td><center>Thành viên</center></td>
+        <td><center>06/10/2008</center></td>
+        <td><center><a href="minhtuan.html">Xem thêm</a></center></td>
+    </tr>
+<var> <tr>
+        <td><center>41</center></td>
+        <td>Phan Xuân Tuấn </td>
+        <td><center>Thành viên</center></td>
+        <td><center>03/05/2008</center></td>
+        <td><center><a href="xuantuan.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>42</center></td>
+        <td>Phạm Thị Thanh Tuyền</td>
+        <td><center>Thành viên</center></td>
+        <td><center>29/06/2008</center></td>
+        <td><center><a href="tuyen.html">Xem thêm</a></center></td>
+    </tr>
+     <tr>
+        <td><center>43</center></td>
+        <td>Đỗ Thảo Vân</td>
+        <td><center>Thành viên</center></td>
+        <td><center>04/04/2008</center></td>
+        <td><center><a href="van.html">Xem thêm</a></center></td>
+    </tr>
+     
+</var></var>
+</table>
+
+</table>
+</body>
+</html>

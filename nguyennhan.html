@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        /* --- Background chính của trang --- */
+body {
+    background: #e0f2f7; /* Màu xanh nhạt của bầu trời */
+    font-family: 'Quicksand', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Quan trọng để các chi tiết bay không tạo scrollbar */
+    position: relative;
+}
+
+/* --- Vibe học đường Container --- */
+.background-vibe {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Bảng đen (Chalkboard) --- */
+.background-vibe::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 400px;
+    height: 250px;
+    background: #333; /* Màu bảng đen */
+    border: 15px solid #8B4513; /* Khung gỗ */
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+    transform: rotate(-5deg); /* Nghiêng nhẹ cho tự nhiên */
+    z-index: 0; /* Đặt phía sau profile */
+    opacity: 0.8;
+    animation: fadeInBackground 2s ease-out forwards;
+}
+
+/* --- Biển hiệu lớp (Class Sign) --- */
+.background-vibe::after {
+    content: "LỚP 12A7 - KỶ YẾU"; /* Nội dung biển hiệu */
+    position: absolute;
+    top: 15%;
+    right: 12%;
+    padding: 10px 20px;
+    background: #fdfd96; /* Màu vàng của giấy */
+    border: 2px dashed #e0e068;
+    border-radius: 8px;
+    font-family: 'Permanent Marker', cursive; /* Font chữ viết tay */
+    font-size: 1.8rem;
+    color: #4CAF50; /* Màu mực xanh lá */
+    transform: rotate(7deg); /* Nghiêng ngược lại */
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 0;
+    opacity: 0.8;
+    animation: fadeInBackground 2s ease-out forwards;
+}
+
+/* --- Các mảnh giấy note bay lượn --- */
+.note {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #ffecb3; /* Màu vàng note */
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: floatNote 15s infinite ease-in-out 3s forwards; /* Bắt đầu sau 3s */
+}
+
+.note-1 {
+    top: 20%; left: 5%;
+    transform: rotate(10deg);
+    animation-delay: 3.5s;
+}
+.note-2 {
+    bottom: 15%; right: 10%;
+    transform: rotate(-15deg);
+    background: #b2eaf5; /* Note màu xanh */
+    animation-delay: 4.2s;
+}
+.note-3 {
+    top: 50%; left: 2%;
+    transform: rotate(5deg);
+    background: #ffcdd2; /* Note màu hồng */
+    animation-delay: 5s;
+}
+
+@keyframes fadeInBackground {
+    from { opacity: 0; }
+    to { opacity: 0.8; }
+}
+
+@keyframes floatNote {
+    0% { transform: translateY(0) rotate(var(--initial-rotate, 0deg)); opacity: 0; }
+    20% { opacity: 1; }
+    50% { transform: translateY(-20px) rotate(var(--mid-rotate, 5deg)); }
+    80% { opacity: 1; }
+    100% { transform: translateY(0) rotate(var(--final-rotate, 0deg)); opacity: 0; }
+}
+
+/* Thêm font chữ ký */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+
+body {
+    background: #f0f2f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Khung cảnh lớp học */
+.classroom-scene {
+    perspective: 1000px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Quicksand:wght@500;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f7f9fc; /* Nền trung tính để nổi bật bảng */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.viewport-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* Bảng đen tập trung */
+.chalkboard {
+    background: #253342;
+    width: 600px; /* Kích thước bảng cố định để dễ nhìn */
+    height: 450px;
+    border: 12px solid #6d4c41; /* Khung gỗ sẫm màu */
+    border-radius: 8px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Profile Card - Thu gọn & Hiện đại */
+.profile-card {
+    background: #ffffff;
+    width: 280px;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    z-index: 5;
+    /* Hiệu ứng máy bay kéo Profile ra đã thiết lập từ trước */
+    animation: revealProfile 2.5s ease-out forwards;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #f0f0f0;
+    margin-bottom: 15px;
+}
+
+/* Chữ viết phấn trên bảng */
+.chalk-text {
+    position: absolute;
+    font-family: 'Caveat', cursive;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.4rem;
+}
+
+.signature-tl { top: 20px; left: 30px; transform: rotate(-10deg); }
+.signature-tr { top: 20px; right: 30px; transform: rotate(10deg); color: #fff17666; }
+.signature-bl { bottom: 20px; left: 30px; transform: rotate(5deg); }
+.signature-br { bottom: 20px; right: 30px; transform: rotate(-5deg); color: #f48fb166; }
+
+/* Chi tiết trang trí bên ngoài bảng */
+.desk-item {
+    position: absolute;
+    background: rgba(0,0,0,0.05);
+    z-index: 0;
+}
+
+/* Giả lập cây thước */
+.ruler {
+    width: 200px;
+    height: 30px;
+    background: #ffd54f;
+    bottom: -60px;
+    left: 20%;
+    transform: rotate(-5deg);
+    border-radius: 3px;
+    opacity: 0.6;
+}
+
+/* Giả lập chiếc bút */
+.pen {
+    width: 150px;
+    height: 10px;
+    background: #42a5f5;
+    bottom: -50px;
+    right: 25%;
+    transform: rotate(15deg);
+    border-radius: 10px;
+    opacity: 0.6;
+}
+
+/* Giữ nguyên animation flyBy và revealProfile của bạn ở đây */
+
+/* Hiệu ứng máy bay bay vụt qua */
+@keyframes flyBy {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    40% {
+        transform: translate(calc(50vw + 25px), calc(-50vh - 25px)) rotate(-15deg);
+        opacity: 1;
+    }
+    70% {
+        transform: translate(calc(50vw + 50px), calc(-50vh - 50px)) rotate(-10deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(calc(100vw + 100px), calc(-100vh - 100px)) rotate(-5deg);
+        opacity: 0;
+    }
+}
+
+/* Hiệu ứng Profile hiện ra theo hướng máy bay */
+@keyframes revealProfile {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) translate(-500px, 500px) rotate(-10deg);
+    }
+    40% {
+        /* Giai đoạn máy bay lướt qua giữa màn hình */
+        opacity: 0.5;
+        transform: scale(0.7) translate(-100px, 100px) rotate(-5deg);
+    }
+    100% {
+        /* Dừng lại tại giữa màn hình, hiện đầy đủ */
+        opacity: 1;
+        transform: scale(1) translate(0, 0) rotate(0deg);
+    }
+}
+.back-home-btn {
+    position: absolute;
+    top: -20px; /* Nhô lên khỏi khung gỗ một chút */
+    left: 20px;
+    background: #ffeb3b; /* Màu vàng nhãn vở */
+    color: #333;
+    text-decoration: none;
+    padding: 8px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 2px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    transform: rotate(-5deg);
+    transition: all 0.3s ease;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px dashed #fbc02d; /* Viền nét đứt như nhãn vở */
+}
+
+.back-home-btn:hover {
+    transform: rotate(0deg) scale(1.1);
+    background: #fff176;
+    box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+}
+
+.back-home-btn .icon {
+    font-size: 1.1rem;
+}
+
+/* Hiệu ứng mờ ảo lúc đầu để xuất hiện cùng profile */
+.back-home-btn {
+    opacity: 0;
+    animation: fadeInBtn 0.5s ease forwards 2.5s; /* Xuất hiện sau khi profile hiện xong */
+}
+
+@keyframes fadeInBtn {
+    to { opacity: 1; }
+}
+/* 1. Căn giữa toàn bộ trình duyệt */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f2f5;
+    overflow-x: hidden;
+}
+
+/* 2. Bảng đen to hơn và luôn ở giữa */
+.chalkboard {
+    background: #253342;
+    width: 850px; /* Tăng chiều rộng bảng */
+    min-height: 600px; /* Tăng chiều cao tối thiểu */
+    border: 15px solid #5d4037;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+    padding: 40px; /* Tạo không gian cho chữ ký xung quanh */
+}
+
+/* 3. Profile Card to và rõ ràng hơn */
+.profile-card {
+    background: #ffffff;
+    width: 380px; /* Tăng chiều rộng profile */
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    text-align: center;
+    z-index: 5;
+    position: relative; /* Đảm bảo nằm trên các chữ ký */
+    animation: revealProfile 2.5s ease-out forwards;
+}
+
+/* 4. Avatar hình khối bo góc (Square Rounded) */
+.avatar {
+    width: 160px; /* Tăng kích thước ảnh */
+    height: 160px;
+    border-radius: 25px; /* Bo góc dạng hình khối */
+    object-fit: cover;
+    border: 5px solid #f8f9fa;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* 5. Điều chỉnh chữ ký để không bị profile che khuất */
+.chalk-text {
+    position: absolute;
+    font-family: 'Caveat', cursive;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 1.6rem; /* Chữ ký to hơn chút cho đỡ chìm */
+    white-space: nowrap;
+}
+
+/* Tọa độ chữ ký (đẩy xa tâm hơn để tránh bị card che) */
+.signature-tl { top: 40px; left: 40px; transform: rotate(-12deg); }
+.signature-tr { top: 40px; right: 40px; transform: rotate(12deg); }
+.signature-bl { bottom: 40px; left: 40px; transform: rotate(8deg); }
+.signature-br { bottom: 40px; right: 40px; transform: rotate(-8deg); }
+.info-content {
+    text-align: left;
+    margin-top: 20px;
+    line-height: 1.6; /* Giúp giãn dòng cho dễ đọc */
+}
+</style>
+</head>
+<body>
+    <div class="background-vibe">
+    <div class="paper-plane-container">
+        </div>
+
+    <div class="profile-card">
+        </div>
+
+    <div class="note note-1"></div>
+    <div class="note note-2"></div>
+    <div class="note note-3"></div>
+</div>
+<div class="viewport-container">
+    <div class="chalkboard">
+        <a href="index.html" class="back-home-btn">
+    <span class="icon">🏠</span>
+    <span class="text">Về trang chủ</span>
+</a>
+        <div class="chalk-decorations">
+            <span class="chalk-text signature-tl">Class 12A7 ❤️</span>
+            <span class="chalk-text signature-tr">Together Forever</span>
+            <span class="chalk-text signature-bl">A7 - 2023-2026</span>
+            <span class="chalk-text signature-br">Hẹn ngày gặp lại!</span>
+            <div class="chalk-doodle-1">✨</div>
+            <div class="chalk-doodle-2">🎓</div>
+        </div>
+
+        <div class="profile-card">
+            <div class="paper-plane-container">...</div>
+            
+            <img src="anhs/nguyennhan.jpg" class="avatar">
+            <h2>Nguyễn Thị Thanh Nhàn </h2>
+            <p class="quote">"Trong kẽ hở của thời gian và hiện thực, tuổi xuân cũng như sắc đẹp, mỏng manh như trang giấy bị gió hong khô..."</p>
+            <div class="info-content">
+                <p><strong>Sở thích:</strong> Xem phim, ăn uống</p>
+                <p><strong>Nguyện vọng:</strong> Em chưa biết</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="desk-item pen"></div>
+    <div class="desk-item ruler"></div>
+</div>
+    <div class="paper-plane-container">
+    <svg class="paper-plane" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21.486 2.514a.5.5 0 0 0-.55-.1l-19 9a.5.5 0 0 0 .017.915l6.588 2.327 2.328 6.587a.5.5 0 0 0 .914.017l9-19a.5.5 0 0 0-.297-.646zM8.31 13.528l9.405-6.638-7.394 8.214-2.011-1.576zm3.161 5.41l-1.576-2.01 8.214-7.395-6.638 9.405z" fill="#fff"/>
+    </svg>
+
+
+</body>
+</html>
